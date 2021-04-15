@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  glasses: false
+  four_out_of_five: 1
+  country_origin: MyString
+
+two:
+  glasses: false
+  four_out_of_five: 1
+  country_origin: MyString

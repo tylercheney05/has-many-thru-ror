@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_232702) do
+ActiveRecord::Schema.define(version: 2021_04_15_002103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dpls", force: :cascade do |t|
+    t.string "location"
+    t.integer "built"
+    t.integer "capacity"
+    t.bigint "user_id", null: false
+    t.bigint "simon_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["simon_id"], name: "index_dpls_on_simon_id"
+    t.index ["user_id"], name: "index_dpls_on_user_id"
+  end
+
+  create_table "simons", force: :cascade do |t|
+    t.boolean "glasses"
+    t.integer "four_out_of_five"
+    t.string "country_origin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +65,6 @@ ActiveRecord::Schema.define(version: 2021_04_13_232702) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "dpls", "simons"
+  add_foreign_key "dpls", "users"
 end
